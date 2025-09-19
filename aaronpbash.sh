@@ -28,7 +28,7 @@
 
 	  read -p "Que año desea saber si es bisiesto?: " bis
 
-	   if [[ $(( $bis % 4 -eq 0 && $(( $bis % 100 )) -ne 0 || $(( $bis % 400 )) -eq 0 ]]; then
+	   if [[ $(($bis % 4)) -eq 0 && $(($bis % 100)) -ne 0 || $(($bis % 400)) -eq 0 ]]; then
 		echo ""
 		echo "El año $bis es bisiesto"
 	   else
