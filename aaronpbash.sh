@@ -37,7 +37,26 @@
 	   fi
 
     	;;
-    	*) echo "Incorrecto"
+	2)
+
+	 read -p "Escriba la IP que quiera poner: " ip
+	 read -p "Escriba la mascara que quiera poner: " masc
+	 read -p "Escriba la puerta de enlace que quiera poner: " gat
+	 read -p "Escriba el DNS que quiera poner: " dns
+
+		nmcli connection modify netplan-enp0s3 ipv4.method manual ipv4.addresses "$ip"/"$masc" ipv4.gateway "$gat" ipv4.dns "$dns"
+		nmcli con down netplan-enp0s3
+		nmcli con up netplan-enp0s3
+		echo ""
+		nmcli device show enp0s3
+		echo ""
+
+	;;
+	16)
+
+	 echo ""
+	;;
+    	*) echo "Opcion incorrecto"
 
    	esac
   done
