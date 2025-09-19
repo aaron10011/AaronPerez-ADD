@@ -55,34 +55,37 @@
 	3)
 
 	 num_ale=$(($RANDOM % 100 + 1))
-	 intento=0
+	 intento=1
 	 num_user=0
 
-		while [[ $intento -lt 5 ]]; do
-echo "$num_ale"
+		while [[ $intento -lt 6 ]]; do
+			echo ""
 			read -p "Ingrese el numero a adivinar: " num_user
-			if [[ $num_user -ne $num_ale ]]; then
+			echo ""
+			if [[ $num_user -eq $num_ale ]]; then
+				echo "Has acertado el numero!!, lo lograste en $intento intentos"
 				echo ""
-				intento=$(($intento + 1))
-				echo "Has fallado, te quedan $((5 - $intento)) intentos"
-				echo ""
-			else
-				echo "Has acertado el numero!!"
+				break
 			fi
 
+			intento=$(($intento + 1))
+
 			if [[ $num_user -gt $num_ale ]]; then
-				echo "Tu numero es mas grande que el numero aleatorio"
+				echo "Tu numero es mas grande que el numero aleatorio, te quedan $((6 - $intento)) intentos"
 			else
-				echo "Tu numero es mas pequeño que el numero aleatorio"
+				echo "Tu numero es mas pequeño que el numero aleatorio, te quedan $((6 - $intento)) intentos"
 			fi
 		done
+			if [[ $intento -eq 6 ]]; then
+				echo "Te has quedado sin intentos, el numero a adivinar era: $num_ale"
+			fi
 
 	;;
 	16)
 
 	 echo ""
 	;;
-    	*) echo "Opcion incorrecto"
+    	*) echo "Opcion incorrecta"
 
    	esac
   done
