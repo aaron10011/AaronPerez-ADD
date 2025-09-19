@@ -52,6 +52,32 @@
 		echo ""
 
 	;;
+	3)
+
+	 num_ale=$(($RANDOM % 100 + 1))
+	 intento=0
+	 num_user=0
+
+		while [[ $intento -lt 5 ]]; do
+echo "$num_ale"
+			read -p "Ingrese el numero a adivinar: " num_user
+			if [[ $num_user -ne $num_ale ]]; then
+				echo ""
+				intento=$(($intento + 1))
+				echo "Has fallado, te quedan $((5 - $intento)) intentos"
+				echo ""
+			else
+				echo "Has acertado el numero!!"
+			fi
+
+			if [[ $num_user -gt $num_ale ]]; then
+				echo "Tu numero es mas grande que el numero aleatorio"
+			else
+				echo "Tu numero es mas pequeño que el numero aleatorio"
+			fi
+		done
+
+	;;
 	16)
 
 	 echo ""
