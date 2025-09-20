@@ -128,6 +128,29 @@
 		fi
 
 	;;
+	7)
+
+	echo ""
+	read -p "Escriba un numero del 1 al 200 para saber como se escribe en romano: " num7
+
+		if [[ $num7 -ge 1 || $num7 -le 200 ]]; then
+			centenas=( "" "C" "CC" )
+			decenas=( "" "X" "XX" "XXX" "XL" "L" "LX" "LXX" "LXXX" "XC" )
+			unidades=( "" "I" "II" "III" "IV" "V" "VI" "VII" "VIII" "IX" )
+
+			centena=$(($num7 / 100))
+			decena=$(($num7 % 100 / 10))
+			unidad=$(($num7 % 10))
+
+			result="${centenas[$centena]}${decenas[$decena]}${unidades[$unidad]}"
+
+			echo
+			echo "El numero $num7 en romano es: $result"
+		else
+			echo ""
+			echo "El numero $num7 no esta dentro de los valores de 1 - 200"
+		fi
+	;;
 	16)
 
 	 echo ""
