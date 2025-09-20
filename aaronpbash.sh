@@ -81,6 +81,24 @@
 			fi
 
 	;;
+	4)
+
+	echo""
+	read -p "Escriba el nombre del fichero que desea buscar: " fichero
+		ruta=$(sudo find / -name "$fichero" 2> /dev/null)
+
+		if [ -z $ruta ]; then
+			echo ""
+			echo "No se encontro el fichero $fichero"
+		elif [ -f $ruta ]; then
+			echo ""
+			echo "El fichero existe, se encuentra en $(dirname $ruta) y tiene $(grep -Eoi 'a|e|i|o|u' $ruta | wc -l) vocales"
+		else
+			echo ""
+			echo "No existe el fichero $fichero"
+		fi
+
+	;;
 	16)
 
 	 echo ""
