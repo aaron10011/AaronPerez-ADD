@@ -114,11 +114,26 @@
 		fi
 
 	;;
+	6)
+
+	echo ""
+	read -p "De que objeto desea saber sus permisos en octal? (Ruta Absoluta): " obj6
+
+		if [ -e $obj6 ]; then
+			echo ""
+			echo "El objeto $obj6 tiene estos permisos: $(stat -c '%a' $obj6)"
+		else
+			echo ""
+			echo "El objeto $obj6 no existe"
+		fi
+
+	;;
 	16)
 
 	 echo ""
 	;;
-    	*) echo "Opcion incorrecta"
+    	*)echo ""
+	  echo "Opcion incorrecta"
 
    	esac
   done
