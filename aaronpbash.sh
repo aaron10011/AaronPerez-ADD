@@ -99,6 +99,21 @@
 		fi
 
 	;;
+	5)
+
+	echo ""
+	read -p "Escriba de que directorio quiere saber el numero de ficheros: " dir5
+
+		if [ -d $dir5 ]; then
+			num_fich=$(find "$dir5" -maxdepth 1 -type f | wc -l)
+			echo ""
+			echo "En el directorio $dir5 hay $num_fich archivo/s"
+		else
+			echo ""
+			echo "$dir5 no es un directorio o no existe"
+		fi
+
+	;;
 	16)
 
 	 echo ""
