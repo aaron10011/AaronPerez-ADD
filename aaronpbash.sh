@@ -189,6 +189,42 @@
 		fi
 
 	;;
+	10)
+
+		echo ""
+                read -p "Nombre que quiera ponerle al fichero: " nom10
+                read -p "Tamaño que quiere que tenga (En K): " tam10
+
+		if [[ ( ! -z $nom10 ) && ( ! -z $tam10 ) ]]; then
+		nombre_base="$nom10"
+
+			for i in {0..9}; do
+				if [[ $i -eq 0 ]]; then
+					nombre_final="$nombre_base"
+				else
+					nombre_final="${nombre_base}${i}"
+				fi
+
+				if [[ ! -e "$nombre_final" ]]; then
+					truncate -s "$tam10"K "$nombre_final"
+					echo ""
+					echo "Fichero $nombre_final creado"
+					break
+				elif [[ $i -eq 9 ]]; then
+					echo ""
+				echo "El fichero $nombre_base y sus variantes hasta el 9 ya existe"
+				fi
+			done
+
+			elif [[ ( -z $nom10 ) && ( ! -z $tam10 ) ]]; then
+                        	truncate -s "$tam10"K "fichero_vacio"
+                	elif [[ ( ! -z $nom10 ) && ( -z $tam10 ) ]]; then
+                        	truncate -s "1024K" "$nom10"
+                	else
+                       		truncate -s "1024k" "fichero_vacio"
+		fi
+
+	;;
 	16)
 
 	 echo ""
