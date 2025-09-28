@@ -172,6 +172,23 @@
 		fi
 
 	;;
+	9)
+
+		echo ""
+		read -p "Nombre que quiera ponerle al fichero: " nom9
+		read -p "Tamaño que quiere que tenga (En K): " tam9
+
+		if [[ ( ! -z $nom9 ) && ( ! -z $tam9 ) ]]; then
+			truncate -s "$tam9"K "$nom9"
+		elif [[ ( -z $nom9 ) && ( ! -z $tam9 ) ]]; then
+			truncate -s "$tam9"K "fichero_vacio"
+		elif [[ ( ! -z $nom9 ) && ( -z $tam9 ) ]]; then
+			truncate -s "1024K" "$nom9"
+		else
+			truncate -s "1024k" "fichero_vacio"
+		fi
+
+	;;
 	16)
 
 	 echo ""
