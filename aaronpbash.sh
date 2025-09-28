@@ -151,6 +151,27 @@
 			echo "El numero $num7 no esta dentro de los valores de 1 - 200"
 		fi
 	;;
+	8)
+
+		comprobar=$(ls /mnt/usuarios/)
+		if [ -z $comprobar ]; then
+			echo ""
+			echo "El directorio esta vacio."
+		else
+			for archivo in /mnt/usuarios/*; do
+				nom_arch=$(basename "$archivo")
+				sudo useradd -m "$nom_arch"
+
+				carpt=$(cat "$archivo")
+				for linea in $carpt; do
+					sudo mkdir "/home/$nom_arch/$linea"
+				done
+
+				sudo rm "$archivo"
+			done
+		fi
+
+	;;
 	16)
 
 	 echo ""
