@@ -1,5 +1,6 @@
 #!/bin/bash
 #Autor: Aaron Perez
+menu() {
  resp=0
  while [ $resp -ne 16 ]; do
   #Creamos el menu de opciones
@@ -196,13 +197,12 @@
                 read -p "Tamaño que quiere que tenga (En K): " tam10
 
 		if [[ ( ! -z $nom10 ) && ( ! -z $tam10 ) ]]; then
-		nombre_base="$nom10"
 
 			for i in {0..9}; do
 				if [[ $i -eq 0 ]]; then
-					nombre_final="$nombre_base"
+					nombre_final="$nom10"
 				else
-					nombre_final="${nombre_base}${i}"
+					nombre_final="${nom10}${i}"
 				fi
 
 				if [[ ! -e "$nombre_final" ]]; then
@@ -225,6 +225,15 @@
 		fi
 
 	;;
+	11)
+		echo ""
+		read -p "Introduzca una palabra para reescribir: " palabra
+
+		reescrita=$(echo "$palabra" | sed 's/a/1/g; s/e/2/g; s/i/3/g; s/o/4/g; s/u/5/g; s/A/1/g; s/E/2/g; s/I/3/g; s/O/4/g; s/U/5/g')
+		echo ""
+		echo "La palabra que introdujo fue: $palabra. Y reescrita queda asi: $reescrita"
+
+	;;
 	16)
 
 	 echo ""
@@ -234,3 +243,6 @@
 
    	esac
   done
+}
+
+menu
