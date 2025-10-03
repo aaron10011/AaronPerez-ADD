@@ -234,6 +234,28 @@ menu() {
 		echo "La palabra que introdujo fue: $palabra. Y reescrita queda asi: $reescrita"
 
 	;;
+	12)
+
+		echo ""
+		n_usu=$(ls --ignore "copiaseguridad" /home/)
+		echo "Este sistema tiene $(ls --ignore='copiaseguridad' /home/ | wc -l) usuarios."
+		echo ""
+		echo "$n_usu"
+		echo ""
+		read -p "A que usuario quiere hacerle una copia de seguridad: " user
+
+		comprobar=$(ls /home/ | grep -i "copiaseguridad" 2> /dev/null)
+		if [ -z $comprobar ]; then
+			sudo mkdir /home/copiaseguridad
+			sudo tar -czvf copiaseguridad"$user"_"$(date +%Y-%m-%d)".tar.gz /home/"$user"
+		else
+			sudo tar -czvf copiaseguridad"$user"_"$(date +%Y-%m-%d)".tar.gz /home/"$user"
+			sudo mv copiaseguridad"$user"_"$(date +%Y-%m-%d)".tar.gz /home/copiaseguridad/
+			echo ""
+			echo "Copia de seguridad del usuario $user creada correctamente, puede verla en /home/copiaseguridad"
+		fi
+
+	;;
 	16)
 
 	 echo ""
