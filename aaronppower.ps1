@@ -254,24 +254,17 @@
         "6"{
 
             Write-Host ""
-            Write-Host "La contraseña será valida si contiene: letras minusculas, letras mayúsculas, números, caracteres especiales y al menos 8 caracteres."
+            Write-Host "La contraseña será válida si contiene: letras minúsculas, letras mayúsculas, números, caracteres especiales y al menos 8 caracteres."
             Write-Host ""
-            $contra=Read-Host "Escriba una contraseña para comprobar su validez"
 
-            $patron = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_-]).{8,}$'
+            $contra = Read-Host "Escriba una contraseña para comprobar su validez"
 
-            if ($contra -match $patron){
-                
+            if (($contra.Length -lt 8) -or ($contra -notmatch '(?-i)[a-z]') -or ($contra -notmatch '(?-i)[A-Z]') -or ($contra -notmatch '[0-9]') -or ($contra -notmatch '[!@#$%^&*_-]')) {
                 Write-Host ""
-                Write-Host "La contraseña es valida."
+                Write-Host "La contraseña no es válida."
+            } else {
                 Write-Host ""
-
-            } else{
-                
-                Write-Host ""
-                Write-Host "La contraseña NO es valida."
-                Write-Host ""
-
+                Write-Host "La contraseña es válida."
             }
         }
 
