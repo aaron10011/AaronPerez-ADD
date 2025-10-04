@@ -93,6 +93,75 @@
            
         }
 
+########################
+
+        "3"{
+
+            Write-Host ""
+            Write-Host "1. Listar Usuarios"
+            Write-Host "2. Crear Usuario"
+            Write-Host "3. Eliminar Usuario"
+            Write-Host "4. Modificar Nombre Usuario"
+            Write-Host ""
+            $resp3=Read-Host "Seleccione una de las siguientes opciones (1, 2, 3...)"
+
+            switch ($resp3){
+                   
+                   "1"{
+                        Write-Host ""
+                        Get-LocalUser
+                        Write-Host ""
+                   }
+
+                   "2"{
+                        Write-Host ""
+                        $nombre=Read-Host "Nombre del nuevo usuario"
+                        $contraseña=Read-Host "Contraseña del nuevo usuario" -AsSecureString
+
+                        Write-Host ""
+                        New-LocalUser -Name $nombre -Password $contraseña
+                        Write-Host "Usuario $nombre creado con exito."
+                        Write-Host ""
+                   }
+
+                   
+                   "3"{
+                        Write-Host ""
+                        $nombre=Read-Host "Nombre del usuario a eliminar"
+
+                        Write-Host ""
+                        Remove-LocalUser -name $nombre
+                        Write-Host "Usuario $nombre elimiando con exito."
+                        Write-Host ""
+                   }
+
+                   
+                   "4"{
+                        Write-Host ""
+                        $nombre=Read-Host "Nombre del usuario a cambiar el nombre"
+                        $nuevo=Read-Host "Nuevo nombre"
+
+                        Write-Host ""
+                        Rename-LocalUser -name $nombre -newname $nuevo
+                        Write-Host "El usuario $nombre ahora se llama $nuevo"
+                        Write-Host ""
+                   }
+
+                Default {Write-Host "Opcion Invalida"}
+            }
+
+        }
+
+########################
+
+        "4"{
+
+            
+
+        }
+
+########################
+
         Default{
             Write-Host "Opción incorrecta, inténtalo de nuevo."
         }
