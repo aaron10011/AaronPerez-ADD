@@ -66,6 +66,33 @@
 
         }
 
+########################
+
+        "2"{
+            
+            $par=0
+            $impar=0
+            $fin=367
+
+            for ($i=1; $i -lt $fin; $i++){
+
+                if (($i % 2 -eq 0)){
+                 
+                    $par++
+                    
+                }else{
+
+                    $impar++
+
+                }
+            }
+            Write-Host ""
+            Write-Host "Numero de dias pares en un año bisiesto: $par"
+            Write-Host "Numero de dias impares en un año bisiesto: $impar"
+            Write-Host ""
+           
+        }
+
         Default{
             Write-Host "Opción incorrecta, inténtalo de nuevo."
         }
