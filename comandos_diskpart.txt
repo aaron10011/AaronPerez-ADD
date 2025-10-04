@@ -1,0 +1,7 @@
+                select disk 1
+                clean
+                convert gpt
+                :loop
+                create partition primary size=1024
+                assign
+                goto loop 

@@ -229,8 +229,50 @@
 
         "5"{
 
-            
+            $disco=Read-Host "De que disco desea saber su tamaño? (C, D...)"
+            Write-Host ""
+            Write-Host "Tamaño disponible en el disco $disco : "(((Get-PSDrive $disco).Free + (Get-PSDrive $disco).Used) / 1GB) "GB"
+            Write-Host ""
+            $ndisco=Read-Host "Ahora indique el numero del disco que desea limpiar (0 = C:\!!)"
+            Write-Host ""
 
+            $ruta= "C:\Users\AaronPerez\Desktop\repositorio\AaronPerez-ADD\comandos_diskpart.txt"
+            $comandos= @"
+                select disk $ndisco
+                clean
+                convert gpt
+"@
+
+            $comandos | Out-File $ruta -Encoding ASCII
+            diskpart /s $ruta
+            Write-Host "Proceso completado."
+
+        }
+
+########################
+
+        "6"{
+
+            Write-Host ""
+            Write-Host "La contraseña será valida si contiene: letras minusculas, letras mayúsculas, números, caracteres especiales y al menos 8 caracteres."
+            Write-Host ""
+            $contra=Read-Host "Escriba una contraseña para comprobar su validez"
+
+            $patron = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_-]).{8,}$'
+
+            if ($contra -match $patron){
+                
+                Write-Host ""
+                Write-Host "La contraseña es valida."
+                Write-Host ""
+
+            } else{
+                
+                Write-Host ""
+                Write-Host "La contraseña NO es valida."
+                Write-Host ""
+
+            }
         }
 
 ########################
