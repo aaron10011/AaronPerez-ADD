@@ -156,6 +156,79 @@
 
         "4"{
 
+            Write-Host ""
+            Write-Host "1. Listar Grupos y Miembros"
+            Write-Host "2. Crear Grupo"
+            Write-Host "3. Eliminar Grupo"
+            Write-Host "4. Crear Miembro de un Grupo"
+            Write-Host "5. Eliminar Miembro de un Grupo"
+            Write-Host ""
+            $resp4=Read-Host "Seleccione una de las siguientes opciones (1, 2, 3...)"
+
+            switch ($resp4){
+                   
+                   "1"{
+                        Write-Host ""
+                        Get-LocalGroup
+                        Write-Host ""
+                        $grupo=Read-Host "De que grupo desea saber os miembros que tiene?"
+                        Write-Host ""
+                        Get-LocalGroupMember -Group $grupo
+                   }
+
+                   "2"{
+                        Write-Host ""
+                        $ngrupo=Read-Host "Nombre del nuevo grupo"
+
+                        Write-Host ""
+                        New-LocalGroup -Name $ngrupo
+                        Write-Host "Grupo $ngrupo creado con exito."
+                        Write-Host ""
+                   }
+
+                   
+                   "3"{
+                        Write-Host ""
+                        $rgrupo=Read-Host "Nombre del grupo a eliminar"
+
+                        Write-Host ""
+                        Remove-LocalGroup -name $rgrupo
+                        Write-Host "Grupo $rgrupo elimiando con exito."
+                        Write-Host ""
+                   }
+
+                   
+                   "4"{
+                        Write-Host ""
+                        $grupo=Read-Host "A que grupo desea añadir un usuario?"
+                        $usu=Read-Host "Nombre del usuario"
+
+                        Write-Host ""
+                        Add-LocalGroupMember -Group $grupo -Member $usu
+                        Write-Host "El usuario $usu a sido añadido a $grupo"
+                        Write-Host ""
+                   }
+
+                   "5"{
+                        Write-Host ""
+                        $grupo=Read-Host "De que grupo desea eliminar un usuario?"
+                        $usu=Read-Host "Nombre del usuario"
+
+                        Write-Host ""
+                        Remove-LocalGroupMember -Group $grupo -Member $usu
+                        Write-Host "El usuario $usu a sido eliminado de $grupo"
+                        Write-Host ""
+                   }
+
+                Default {Write-Host "Opcion Invalida"}
+            }
+
+        }
+
+########################
+
+        "5"{
+
             
 
         }
