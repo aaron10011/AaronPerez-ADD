@@ -363,6 +363,41 @@
 
 ########################
 
+        "11"{
+
+            $usus=(ls "C:\Users\")
+
+            if(-not (Test-Path "C:\CopiasSeguridad")) {
+
+                mkdir "C:\CopiasSeguridad" > $null
+
+                foreach ($usu in $usus){
+                
+                    Compress-Archive -Path "C:\Users\$usu\" -DestinationPath "C:\CopiasSeguridad\$usu.zip"
+                }
+
+            } else{
+
+                foreach ($usu in $usus){
+                
+                    Compress-Archive -Path "C:\Users\$usu\" -DestinationPath "C:\CopiasSeguridad\$usu.zip"
+                }
+            }
+
+        }
+
+########################
+        
+        "12"{
+
+        }
+
+########################
+
+        "16"{Write-Host "Hasta la proxima!!" ; Start-Sleep -Seconds 2 ; cls}
+
+########################
+
         Default{
             Write-Host "Opción incorrecta, inténtalo de nuevo."
         }
