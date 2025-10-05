@@ -262,10 +262,50 @@
             if (($contra.Length -lt 8) -or ($contra -notmatch '(?-i)[a-z]') -or ($contra -notmatch '(?-i)[A-Z]') -or ($contra -notmatch '[0-9]') -or ($contra -notmatch '[!@#$%^&*_-]')) {
                 Write-Host ""
                 Write-Host "La contraseña no es válida."
-            } else {
+            }else {
                 Write-Host ""
                 Write-Host "La contraseña es válida."
             }
+        }
+
+########################
+
+        "7"{
+
+            $numero=Read-Host "Introduzca cuantos numeros de Fibonacci desea ver"
+            Write-Host ""
+            $x=0
+            $y=1
+
+            for ($i=0; $i -lt $numero; $i++){
+
+                Write-Host $x
+                $fibo = $y + $x
+                $x = $y
+                $y = $fibo
+
+            }
+        }
+
+########################
+
+        "8"{
+
+            $numero=Read-Host "Introduzca cuantos numeros de Fibonacci desea ver (Recursivo)"
+            Write-Host ""
+            $x=0
+            $y=1
+            $array=@()
+
+            for ($i=0; $i -lt $numero; $i++){
+
+                $array += $x
+                $fibo = $y + $x
+                $x = $y
+                $y = $fibo
+            }
+
+            Write-Host "$($array | Sort-Object -Descending)"
         }
 
 ########################
