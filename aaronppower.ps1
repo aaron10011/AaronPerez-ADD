@@ -333,6 +333,36 @@
 
 ########################
 
+        "10"{
+            
+            $discos = Get-PSDrive | Where-Object {$_.Free -ne $null -and $_.Used -ne $null} | Select-Object "Name"
+            
+            foreach ($disco in $discos){
+                
+                [INT]$espacio=(Get-PSDrive $($disco.Name)).Free / 1GB
+                $porcentaje= (((Get-PSDrive $($disco.Name)).Free / 1GB) + ((Get-PSDrive $($disco.Name)).Used / 1GB)) * 0.1
+
+                if($espacio -lt $porcentaje){
+                
+                    $resultado = "AVISO: El disco $($disco.Name) tiene menos de un 10% de capacidad, por favor libere espacio."
+
+                }else{
+                
+                    $resultado = "El disco $($disco.Name) tiene suficiente espacio libre."
+
+                } 
+            
+                    Write-Host ""
+                    Write-Host $resultado
+
+                    $resultado >> "C:\tamañodiscos.log"
+
+            }
+
+        }
+
+########################
+
         Default{
             Write-Host "Opción incorrecta, inténtalo de nuevo."
         }
