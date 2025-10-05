@@ -309,6 +309,29 @@
         }
 
 ########################
+        
+        "9"{
+
+            $i=0
+            $array = @()
+
+            while($i -lt 6){
+            
+                Get-CimInstance -ClassName Win32_Processor | Out-Null
+                Start-Sleep -Seconds 0.1
+                $usoCPU= (Get-CimInstance -ClassName Win32_Processor | Measure-Object -Property LoadPercentage -Average).Average
+                $array += $usoCPU
+                Start-Sleep -Seconds 5
+                $i++
+            }
+
+            $promedio=($array | Measure-Object -Average).Average
+            Write-Host ""
+            Write-Host "Uso de CPU promedio en 30s: $usoCPU %"
+
+        }
+
+########################
 
         Default{
             Write-Host "Opción incorrecta, inténtalo de nuevo."
