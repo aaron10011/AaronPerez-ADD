@@ -389,12 +389,46 @@
 ########################
         
         "12"{
+            
+            $comprobar = (Get-ChildItem "C:\automatizar").BaseName
+
+            if($comprobar -eq $null){
+
+                Write-Host "El directorio esta vacio"
+
+            } else{
+
+                foreach ($usuario in $comprobar){
+
+                    New-LocalUser -Name "$usuario" -NoPassword > $null
+
+                    $dirs=Get-Content "C:\automatizar\$usuario.txt"
+
+                    foreach ($directorios in $dirs){
+
+                        mkdir "C:\Users\$usuario\$directorios" > $null
+
+                    }
+
+                    rm "C:\automatizar\$usuario.txt"
+
+                }
+
+            }
 
         }
 
 ########################
 
-        "16"{Write-Host "Hasta la proxima!!" ; Start-Sleep -Seconds 2 ; cls}
+        "13"{
+
+            
+
+        }
+
+########################
+
+        "16"{Write-Host "Hasta la proxima!!" ; Start-Sleep -Seconds 1 ; cls}
 
 ########################
 
