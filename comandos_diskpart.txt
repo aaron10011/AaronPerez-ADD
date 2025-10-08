@@ -1,7 +1,18 @@
-                select disk 1
-                clean
-                convert gpt
-                :loop
-                create partition primary size=1024
-                assign
-                goto loop 
+$numDisco = Read-Host "Introduce el número de disco"
+    $disco = Get-Disk -Number $numDisco
+    $GB = [math]::Round($disco.Size / 1GB, 2)
+    Write-Host "Tamaño del disco seleccionado: $GB GB"
+@" 
+    select disk $numDisco
+    clean
+    convert gpt
+"@ | diskpart
+
+    $partCount = [math]::Floor($GB)
+    for($i = 0; $i -le $partCount; $i++)
+    {
+@" 
+        select disk $numDisco
+        create partition primary size=1024
+"@ | diskpart
+    }
