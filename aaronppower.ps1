@@ -1,30 +1,4 @@
-﻿do {
-    Write-Host ""
-    Write-Host "1. Pizza"
-    Write-Host "2. Días"
-    Write-Host "3. Menu Usuarios"
-    Write-Host "4. Menu Grupos"
-    Write-Host "5. Diskp"
-    Write-Host "6. Contraseña"
-    Write-Host "7. Fibonacci"
-    Write-Host "8. Fibonacci Recursividad"
-    Write-Host "9. Monitoreo"
-    Write-Host "10. Alerta Espacio"
-    Write-host "11. Copias Masivas"
-    Write-Host "12. Automatizar PS"
-    Write-Host "13. Barrido"
-    Write-Host "14. Evento"
-    Write-Host "15. Limpieza"
-    Write-Host "16. Salir"
-    Write-Host ""
-
-    $opcion= Read-Host "Introduce tu selección: "
-    Write-Host ""
-
-    switch ($opcion){
-
-        "1" {
-            
+﻿function pizza{
             $pizza= Read-Host "Quiere una pizza vegetariana o no? (responder si o no): "
 
             if ($pizza -eq "si"){
@@ -63,13 +37,9 @@
                 write-host ""
                 Write-Host "Opción Inválida, responda con si o no."
             }
-
         }
 
-########################
-
-        "2"{
-            
+function bisiesto{ 
             $par=0
             $impar=0
             $fin=367
@@ -90,8 +60,40 @@
             Write-Host "Numero de dias pares en un año bisiesto: $par"
             Write-Host "Numero de dias impares en un año bisiesto: $impar"
             Write-Host ""
-           
         }
+
+function menu{
+do {
+    Write-Host ""
+    Write-Host "1. Pizza"
+    Write-Host "2. Días"
+    Write-Host "3. Menu Usuarios"
+    Write-Host "4. Menu Grupos"
+    Write-Host "5. Diskp"
+    Write-Host "6. Contraseña"
+    Write-Host "7. Fibonacci"
+    Write-Host "8. Fibonacci Recursividad"
+    Write-Host "9. Monitoreo"
+    Write-Host "10. Alerta Espacio"
+    Write-host "11. Copias Masivas"
+    Write-Host "12. Automatizar PS"
+    Write-Host "13. Barrido"
+    Write-Host "14. Evento"
+    Write-Host "0. Agenda"
+    Write-Host "15. Limpieza"
+    Write-Host "16. Salir"
+    Write-Host ""
+
+    $opcion= Read-Host "Introduce tu selección: "
+    Write-Host ""
+
+    switch ($opcion){
+
+        "1" {pizza}
+
+########################
+
+        "2"{bisiesto}
 
 ########################
 
@@ -420,9 +422,24 @@
 
 ########################
 
-        "13"{
+        "13"{}
 
-            
+########################
+
+        "14"{
+            Write-Host ""
+            $num = Read-Host "Cuantos eventos quiere extraer? (Tanto del sistema como de aplicaciones)"
+
+            $sys= Get-EventLog -LogName System -EntryType Warning, Error -Newest 200 | Select-Object -First $num
+            $app= Get-EventLog -LogName Application -EntryType Warning, Error -Newest 200 | Select-Object -First $num
+
+            "`nEVENTOS DEL SISTEMA:" >> "C:\eventos.csv"
+            $sys >> "C:\eventos.csv"
+            "`n" >> "C:\eventos.csv"
+            "EVENTOS DE APLICACIONES:" >> "C:\eventos.csv"
+            $app >> "C:\eventos.csv"
+
+            Write-Host "`nCompletado!! Puede ver los registros guardados en C:\eventos.log"
 
         }
 
@@ -438,3 +455,6 @@
     }
 }
 while ($opcion -ne 16)
+}
+
+menu
