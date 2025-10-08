@@ -1,0 +1,23 @@
+#Comandos para grupos en AD
+
+Get-ADGroup -Filter * | Select-Object -ExpandProperty Name    #Obtener grupos
+
+get-ADgroupMember -Identity "$grp" | Select-Object -ExpandProperty Name    #Obtener miembros de grupos
+
+New-ADGroup -name $nombregrp -GroupScope Global    #Crear grupos
+
+remove-ADgroup $eliminar    #Eliminar grupos
+
+Add-ADGroupMember -Identity $grp -Members $miembro    #Añadir miembros
+
+Remove-ADGroupMember -Identity $grp -Members $usu    #Eliminar miembros
+
+#Comandos para usuarios en AD
+
+Get-ADUser -Filter *    #Obtener usuarios
+
+New-ADUser -Name $nombre -AccountPassword $pass    #Crear usuarios
+
+Remove-ADUser -Identity $nombre    #Elimnar usuarios
+
+ Get-ADUser $nombre | RenameADObject -Newname $nombreNuevo    #Renombrar usuarios
